@@ -33,9 +33,26 @@
       "targetType": "wappler",
       "databaseConnectionType": "sqlite",
       "localFolder": "file:///C:/Users/Michael/OneDrive/aa2706"
+    },
+    {
+      "name": "Production",
+      "remoteURL": "https://mmmmycyberth.co.il",
+      "access": "ftp",
+      "targetType": "wappler",
+      "databaseConnectionType": "custom",
+      "usage": "production",
+      "db_host": "45.8.224.95",
+      "db_port": "3306",
+      "db_user": "cyberjew",
+      "db_password": "nf$TH39cyber",
+      "db_database": "cyberjew_MichaelB",
+      "ftpServer": "45.8.224.95",
+      "ftpUser": "cyberjew",
+      "ftpPassword": "0ccbf8d3d8cc80f13adc7060"
     }
   ],
   "activeTarget": "Development",
   "projectType": "web",
-  "extensions": []
+  "extensions": [],
+  "activeGitRemote": "remote_git"
 }

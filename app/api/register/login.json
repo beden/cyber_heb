@@ -1,17 +1,87 @@
 {
   "meta": {
+    "options": {
+      "linkedFile": "/views/register1.ejs",
+      "linkedForm": "serverconnectform1"
+    },
     "$_POST": [
       {
         "type": "text",
+        "fieldName": "email",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "חובה"
+            },
+            "core:email": {
+              "param": ""
+            }
+          }
+        },
         "name": "email"
       },
       {
         "type": "text",
+        "fieldName": "password",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "חובה"
+            },
+            "core:minlength": {
+              "param": "8",
+              "message": "לפחות שמונה אותיות או מספרים"
+            }
+          }
+        },
         "name": "password"
       },
       {
         "type": "text",
         "name": "remember"
+      },
+      {
+        "type": "text",
+        "fieldName": "product_id",
+        "name": "product_id"
+      },
+      {
+        "type": "text",
+        "fieldName": "product_name",
+        "name": "product_name"
+      },
+      {
+        "type": "text",
+        "fieldName": "first_name",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "חובה"
+            }
+          }
+        },
+        "name": "first_name"
+      },
+      {
+        "type": "text",
+        "fieldName": "family_name",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "חובה"
+            }
+          }
+        },
+        "name": "family_name"
+      },
+      {
+        "type": "text",
+        "fieldName": "input1",
+        "name": "input1"
       }
     ]
   },
