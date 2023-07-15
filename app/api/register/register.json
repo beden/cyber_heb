@@ -149,12 +149,12 @@
         }
       },
       {
-        "name": "hash_id",
+        "name": "my_has_id",
         "module": "crypto",
         "action": "passwordHash",
         "options": {
-          "password": "{{$_POST.password}}",
-          "algo": "argon2id"
+          "algo": "argon2id",
+          "password": "{{$_POST.password}}"
         },
         "outputType": "text"
       },
@@ -189,12 +189,12 @@
                 "table": "users",
                 "column": "password",
                 "type": "text",
-                "value": "{{hash}}"
+                "value": "{{my_has_id.sha256()}}"
               }
             ],
             "table": "users",
             "returning": "id_users",
-            "query": "INSERT INTO users\n(first_name, family_name, email, password) VALUES (:P1 /* {{$_POST.first_name}} */, :P2 /* {{$_POST.family_name}} */, :P3 /* {{$_POST.email}} */, :P4 /* {{hash}} */)",
+            "query": "INSERT INTO users\n(first_name, family_name, email, password) VALUES (:P1 /* {{$_POST.first_name}} */, :P2 /* {{$_POST.family_name}} */, :P3 /* {{$_POST.email}} */, :P4 /* {{my_has_id.sha256()}} */)",
             "params": [
               {
                 "name": ":P1",
@@ -214,7 +214,7 @@
               {
                 "name": ":P4",
                 "type": "expression",
-                "value": "{{hash}}"
+                "value": "{{my_has_id.sha256()}}"
               }
             ]
           }
