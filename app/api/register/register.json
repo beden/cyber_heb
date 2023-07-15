@@ -85,14 +85,28 @@
   "exec": {
     "steps": [
       {
-        "name": "hash",
-        "module": "crypto",
-        "action": "passwordHash",
+        "name": "validate",
+        "module": "validator",
+        "action": "validate",
         "options": {
-          "password": "{{$_POST.password.sha256($_POST.password)}}",
-          "algo": "argon2id"
-        },
-        "outputType": "text"
+          "data": [
+            {
+              "name": "double email",
+              "value": "",
+              "rules": {
+                "db:notexists": {
+                  "param": {
+                    "connection": "db",
+                    "table": "roles",
+                    "column": "id_roles"
+                  },
+                  "message": "email already exists in database."
+                }
+              },
+              "fieldName": "email"
+            }
+          ]
+        }
       },
       {
         "name": "",
@@ -133,30 +147,6 @@
           }
         },
         "outputType": "boolean"
-      },
-      {
-        "name": "validate",
-        "module": "validator",
-        "action": "validate",
-        "options": {
-          "data": [
-            {
-              "name": "double email",
-              "value": "",
-              "rules": {
-                "db:notexists": {
-                  "param": {
-                    "connection": "db",
-                    "table": "roles",
-                    "column": "id_roles"
-                  },
-                  "message": "email already exists in database."
-                }
-              },
-              "fieldName": "email"
-            }
-          ]
-        }
       },
       {
         "name": "insert",
@@ -276,8 +266,5 @@
         ]
       }
     ]
-  },
-  "usedModules": {
-    "argon2": "^0.28.3"
   }
 }
