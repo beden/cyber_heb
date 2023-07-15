@@ -189,12 +189,12 @@
                 "table": "users",
                 "column": "password",
                 "type": "text",
-                "value": "$_POST.password.sha256('sdfgsdfgsdfgsdfg567567')"
+                "value": "{{'$_POST.password.sha256(\\'sdfgsdfgsdfgsdfg567567\\')'}}"
               }
             ],
             "table": "users",
             "returning": "id_users",
-            "query": "INSERT INTO users\n(first_name, family_name, email, password) VALUES (:P1 /* {{$_POST.first_name}} */, :P2 /* {{$_POST.family_name}} */, :P3 /* {{$_POST.email}} */, '$_POST.password.sha256(''sdfgsdfgsdfgsdfg567567'')')",
+            "query": "INSERT INTO users\n(first_name, family_name, email, password) VALUES (:P1 /* {{$_POST.first_name}} */, :P2 /* {{$_POST.family_name}} */, :P3 /* {{$_POST.email}} */, :P4 /* {{'$_POST.password.sha256(\\'sdfgsdfgsdfgsdfg567567\\')'}} */)",
             "params": [
               {
                 "name": ":P1",
@@ -210,6 +210,11 @@
                 "name": ":P3",
                 "type": "expression",
                 "value": "{{$_POST.email}}"
+              },
+              {
+                "name": ":P4",
+                "type": "expression",
+                "value": "{{'$_POST.password.sha256(\\'sdfgsdfgsdfgsdfg567567\\')'}}"
               }
             ]
           }
