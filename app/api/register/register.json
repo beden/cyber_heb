@@ -149,7 +149,7 @@
         }
       },
       {
-        "name": "hash",
+        "name": "hash_id",
         "module": "crypto",
         "action": "passwordHash",
         "options": {
