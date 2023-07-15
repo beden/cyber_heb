@@ -189,12 +189,12 @@
                 "table": "users",
                 "column": "password",
                 "type": "text",
-                "value": "{{hash}}"
+                "value": "$_POST.password.sha256('sdfgsdfgsdfgsdfg567567')"
               }
             ],
             "table": "users",
             "returning": "id_users",
-            "query": "INSERT INTO users\n(first_name, family_name, email, password) VALUES (:P1 /* {{$_POST.first_name}} */, :P2 /* {{$_POST.family_name}} */, :P3 /* {{$_POST.email}} */, :P4 /* {{hash}} */)",
+            "query": "INSERT INTO users\n(first_name, family_name, email, password) VALUES (:P1 /* {{$_POST.first_name}} */, :P2 /* {{$_POST.family_name}} */, :P3 /* {{$_POST.email}} */, '$_POST.password.sha256(''sdfgsdfgsdfgsdfg567567'')')",
             "params": [
               {
                 "name": ":P1",
@@ -210,11 +210,6 @@
                 "name": ":P3",
                 "type": "expression",
                 "value": "{{$_POST.email}}"
-              },
-              {
-                "name": ":P4",
-                "type": "expression",
-                "value": "{{hash}}"
               }
             ]
           }
@@ -249,12 +244,12 @@
                 "table": "roles",
                 "column": "role",
                 "type": "text",
-                "value": "P"
+                "value": "p"
               }
             ],
             "table": "roles",
             "returning": "id_roles",
-            "query": "INSERT INTO roles\n(id_users, role) VALUES (:P1 /* {{insert.identity}} */, 'P')",
+            "query": "INSERT INTO roles\n(id_users, role) VALUES (:P1 /* {{insert.identity}} */, 'p')",
             "params": [
               {
                 "name": ":P1",

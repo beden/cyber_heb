@@ -14,14 +14,25 @@
       "password": "password"
     },
     "permissions": {
-      "Patient": {
+      "admin": {
         "table": "roles",
         "identity": "id_users",
         "conditions": [
           {
             "column": "role",
             "operator": "=",
-            "value": "P"
+            "value": "A"
+          }
+        ]
+      },
+      "patient": {
+        "table": "roles",
+        "identity": "id_users",
+        "conditions": [
+          {
+            "column": "role",
+            "operator": "=",
+            "value": "p"
           }
         ]
       }
