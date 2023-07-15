@@ -74,10 +74,56 @@
         },
         "name": "password"
       }
+    ],
+    "$_SESSION": [
+      {
+        "type": "text",
+        "name": "regcode1"
+      }
     ]
   },
   "exec": {
     "steps": [
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{$_POST.product_name!=$_SESSION.regcode1}}",
+          "then": {
+            "steps": {
+              "name": "unuautthohorised_copy",
+              "module": "core",
+              "action": "response",
+              "options": {
+                "status": 401,
+                "data": "not allowed"
+              }
+            }
+          }
+        },
+        "outputType": "boolean"
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{$_POST.product_id.length()>0}}",
+          "then": {
+            "steps": {
+              "name": "unuautthohorised",
+              "module": "core",
+              "action": "response",
+              "options": {
+                "status": 401,
+                "data": "not allowed"
+              }
+            }
+          }
+        },
+        "outputType": "boolean"
+      },
       {
         "name": "validate",
         "module": "validator",
