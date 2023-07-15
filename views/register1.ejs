@@ -1,4 +1,5 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="register1" appconnect="local" dir="rtl" title="Registraton Page" components="{dmxValidator:{},dmxBrowser:{},dmxNotifications:{}}" -->
+<dmx-serverconnect id="serverconnect1" url="/api/register/register"></dmx-serverconnect>
 <dmx-serverconnect id="conn_regcode1" url="/api/register/regcode1"></dmx-serverconnect>
 <dmx-notifications id="notifies1" offset-x="75" offset-y="75"></dmx-notifications>
 <div is="dmx-browser" id="browser1"></div>
@@ -10,7 +11,7 @@
             <div class="d-none d-sm-block col-sm-1 col-lg-3 col-xl-3 col-md-1 col-xxl-4">
             </div>
             <div class="col-md">
-                <form is="dmx-serverconnect-form" id="serverconnectform1" method="post" action="/api/register/register" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="serverconnectform1.reset();browser1.goto('/Test')">
+                <form is="dmx-serverconnect-form" id="serverconnectform1" method="post" action="/api/register/register" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="serverconnectform1.reset();browser1.goto('/')" dmx-on:error="notifies1.warning('Error')">
                     <div class="form-group mb-3">
                         <input class="d-none" id="product_id" name="product_id" aria-describedby="input2_help" placeholder="Enter some text">
                         <input id="product_name" name="product_name" class="d-none" dmx-bind:value="conn_regcode1.data.regcode1">

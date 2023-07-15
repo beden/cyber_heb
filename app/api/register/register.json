@@ -1,3 +1,224 @@
 {
-  "exec": {}
+  "meta": {
+    "options": {
+      "linkedFile": "/views/register1.ejs",
+      "linkedForm": "serverconnectform1"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "product_id",
+        "name": "product_id"
+      },
+      {
+        "type": "text",
+        "fieldName": "product_name",
+        "name": "product_name"
+      },
+      {
+        "type": "text",
+        "fieldName": "first_name",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "חובה"
+            }
+          }
+        },
+        "name": "first_name"
+      },
+      {
+        "type": "text",
+        "fieldName": "family_name",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "חובה"
+            }
+          }
+        },
+        "name": "family_name"
+      },
+      {
+        "type": "text",
+        "fieldName": "email",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "חובה"
+            },
+            "core:email": {
+              "param": ""
+            }
+          }
+        },
+        "name": "email"
+      },
+      {
+        "type": "text",
+        "fieldName": "password",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "חובה"
+            },
+            "core:minlength": {
+              "param": "8",
+              "message": "לפחות שמונה אותיות או מספרים"
+            }
+          }
+        },
+        "name": "password"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "validate",
+        "module": "validator",
+        "action": "validate",
+        "options": {
+          "data": [
+            {
+              "name": "double email",
+              "value": "",
+              "rules": {
+                "db:notexists": {
+                  "param": {
+                    "connection": "db",
+                    "table": "roles",
+                    "column": "id_roles"
+                  },
+                  "message": "email already exists in database."
+                }
+              },
+              "fieldName": "email"
+            }
+          ]
+        }
+      },
+      {
+        "name": "insert",
+        "module": "dbupdater",
+        "action": "insert",
+        "options": {
+          "connection": "db",
+          "sql": {
+            "type": "insert",
+            "values": [
+              {
+                "table": "users",
+                "column": "first_name",
+                "type": "text",
+                "value": "{{$_POST.first_name}}"
+              },
+              {
+                "table": "users",
+                "column": "family_name",
+                "type": "text",
+                "value": "{{$_POST.family_name}}"
+              },
+              {
+                "table": "users",
+                "column": "email",
+                "type": "text",
+                "value": "{{$_POST.email}}"
+              },
+              {
+                "table": "users",
+                "column": "password",
+                "type": "text",
+                "value": "{{$_POST.password}}"
+              }
+            ],
+            "table": "users",
+            "returning": "id_users",
+            "query": "INSERT INTO users\n(first_name, family_name, email, password) VALUES (:P1 /* {{$_POST.first_name}} */, :P2 /* {{$_POST.family_name}} */, :P3 /* {{$_POST.email}} */, :P4 /* {{$_POST.password}} */)",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_POST.first_name}}"
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{$_POST.family_name}}"
+              },
+              {
+                "name": ":P3",
+                "type": "expression",
+                "value": "{{$_POST.email}}"
+              },
+              {
+                "name": ":P4",
+                "type": "expression",
+                "value": "{{$_POST.password}}"
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "identity",
+            "type": "text"
+          },
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "name": "insert1",
+        "module": "dbupdater",
+        "action": "insert",
+        "options": {
+          "connection": "db",
+          "sql": {
+            "type": "insert",
+            "values": [
+              {
+                "table": "roles",
+                "column": "id_users",
+                "type": "text",
+                "value": "{{insert.identity}}"
+              },
+              {
+                "table": "roles",
+                "column": "role",
+                "type": "text",
+                "value": "P"
+              }
+            ],
+            "table": "roles",
+            "returning": "id_roles",
+            "query": "INSERT INTO roles\n(id_users, role) VALUES (:P1 /* {{insert.identity}} */, 'P')",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{insert.identity}}"
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "identity",
+            "type": "text"
+          },
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      }
+    ]
+  }
 }
