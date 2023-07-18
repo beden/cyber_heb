@@ -1,5 +1,5 @@
 {
-  "projectName": "myCybertherapy_hebrew_copy",
+  "projectName": "mcbt_heb_18_07_23",
   "styleFile": "/css/style.css",
   "assetsFolder": "/assets",
   "designFramework": "bootstrap5",
@@ -31,12 +31,11 @@
       "remoteURL": "http://localhost:3000/",
       "access": "local",
       "targetType": "wappler",
-      "databaseConnectionType": "sqlite",
-      "localFolder": "file:///C:/Users/Michael/OneDrive/aa2706"
+      "databaseConnectionType": "sqlite"
     },
     {
       "name": "Production",
-      "remoteURL": "https://mmmmycyberth.co.il",
+      "remoteURL": "https://mycybertherapy.co.il",
       "access": "ftp",
       "targetType": "wappler",
       "databaseConnectionType": "custom",
